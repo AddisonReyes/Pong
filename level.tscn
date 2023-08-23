@@ -1,0 +1,207 @@
+[gd_scene load_steps=10 format=3 uid="uid://bx803bspv66ej"]
+
+[ext_resource type="PackedScene" uid="uid://bl00t8q5v81hk" path="res://player.tscn" id="1_m0d0m"]
+[ext_resource type="Script" path="res://level.gd" id="1_uy0e0"]
+[ext_resource type="PackedScene" uid="uid://c4wefuhowh6gd" path="res://ball.tscn" id="2_f62wl"]
+[ext_resource type="Script" path="res://opponent.gd" id="2_im3ov"]
+[ext_resource type="FontFile" uid="uid://0xm5p4pi8rw0" path="res://alagard.ttf" id="5_fqc7i"]
+[ext_resource type="AudioStream" uid="uid://ciw471xl7tbwr" path="res://menu.wav" id="6_3s3kd"]
+[ext_resource type="PackedScene" uid="uid://cqhnj2hr8356s" path="res://pause.tscn" id="6_p5hsr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emmt5"]
+size = Vector2(2048, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bog7k"]
+size = Vector2(30, 1080)
+
+[node name="Level" type="Node2D"]
+process_mode = 1
+script = ExtResource("1_uy0e0")
+
+[node name="Background" type="ColorRect" parent="."]
+process_mode = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+process_mode = 1
+offset_left = 959.0
+offset_top = 264.0
+offset_right = 962.0
+offset_bottom = 1088.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+process_mode = 1
+offset_left = 1352.0
+offset_top = -64.0
+offset_right = 1355.0
+offset_bottom = 760.0
+scale = Vector2(1, 0.4)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+process_mode = 1
+offset_left = 568.0
+offset_top = -64.0
+offset_right = 571.0
+offset_bottom = 760.0
+scale = Vector2(1, 0.4)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+process_mode = 1
+offset_left = 1352.0
+offset_top = 263.0
+offset_right = 1355.0
+offset_bottom = 1079.0
+rotation = 1.5708
+scale = Vector2(1, 0.959999)
+metadata/_edit_use_anchors_ = true
+
+[node name="Pared Superior" type="StaticBody2D" parent="."]
+process_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared Superior"]
+process_mode = 1
+position = Vector2(960, -15)
+shape = SubResource("RectangleShape2D_emmt5")
+
+[node name="Pared Inferior" type="StaticBody2D" parent="."]
+process_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared Inferior"]
+process_mode = 1
+position = Vector2(960, 1095)
+shape = SubResource("RectangleShape2D_emmt5")
+
+[node name="Pared izquierda" type="StaticBody2D" parent="."]
+process_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared izquierda"]
+process_mode = 1
+position = Vector2(-56, 560)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_emmt5")
+
+[node name="Pared derecha" type="StaticBody2D" parent="."]
+process_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared derecha"]
+process_mode = 1
+position = Vector2(1976, 536)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_emmt5")
+
+[node name="Area2D" type="Area2D" parent="."]
+process_mode = 1
+modulate = Color(0.701961, 0, 0.701961, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+process_mode = 1
+position = Vector2(960, 0)
+shape = SubResource("RectangleShape2D_emmt5")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+process_mode = 1
+position = Vector2(960, 1080)
+shape = SubResource("RectangleShape2D_emmt5")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+process_mode = 1
+position = Vector2(-48, 560)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_emmt5")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
+process_mode = 1
+position = Vector2(1968, 536)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_emmt5")
+
+[node name="Arco Oponente" type="Area2D" parent="."]
+process_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arco Oponente"]
+position = Vector2(-15, 540)
+shape = SubResource("RectangleShape2D_bog7k")
+
+[node name="Arco Player" type="Area2D" parent="."]
+process_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arco Player"]
+position = Vector2(1935, 540)
+shape = SubResource("RectangleShape2D_bog7k")
+
+[node name="Player" parent="." instance=ExtResource("1_m0d0m")]
+process_mode = 1
+position = Vector2(1839, 460)
+
+[node name="Opponent" parent="." instance=ExtResource("1_m0d0m")]
+process_mode = 1
+position = Vector2(60, 460)
+script = ExtResource("2_im3ov")
+
+[node name="Marcador Izq" type="Label" parent="."]
+process_mode = 1
+offset_right = 958.0
+offset_bottom = 1080.0
+theme_override_fonts/font = ExtResource("5_fqc7i")
+theme_override_font_sizes/font_size = 32
+text = "Marcador de la computadora
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Marcador Der" type="Label" parent="."]
+process_mode = 1
+offset_left = 962.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_fonts/font = ExtResource("5_fqc7i")
+theme_override_font_sizes/font_size = 32
+text = "Tu marcador
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+process_mode = 1
+offset_left = 592.0
+offset_top = 24.0
+offset_right = 1328.0
+offset_bottom = 240.0
+theme_override_fonts/font = ExtResource("5_fqc7i")
+theme_override_font_sizes/font_size = 32
+text = "Cuando se marque 1 punto aqui se mostrara el modificador que tendra la siguiente partida, es completamente aleatorio!!"
+horizontal_alignment = 3
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="FakeBalls" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="Ball" parent="." instance=ExtResource("2_f62wl")]
+process_mode = 1
+position = Vector2(960, 540)
+
+[node name="RestartTimer" type="Timer" parent="."]
+process_mode = 1
+wait_time = 0.666
+
+[node name="Control" parent="." instance=ExtResource("6_p5hsr")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_3s3kd")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Arco Oponente" to="." method="_on_arco_oponente_body_entered"]
+[connection signal="body_entered" from="Arco Player" to="." method="_on_arco_player_body_entered"]
+[connection signal="timeout" from="RestartTimer" to="Ball" method="_on_restart_timer_timeout"]

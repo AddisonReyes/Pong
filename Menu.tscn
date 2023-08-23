@@ -1,0 +1,161 @@
+[gd_scene load_steps=10 format=3 uid="uid://d3xeqxejewxph"]
+
+[ext_resource type="Script" path="res://Menu.gd" id="1_bdpsr"]
+[ext_resource type="FontFile" uid="uid://0xm5p4pi8rw0" path="res://alagard.ttf" id="1_iikqu"]
+[ext_resource type="PackedScene" uid="uid://bgprpwmg6eboy" path="res://fakeBall.tscn" id="2_e0rnd"]
+[ext_resource type="PackedScene" uid="uid://bl00t8q5v81hk" path="res://player.tscn" id="3_u12nk"]
+[ext_resource type="Script" path="res://opponent.gd" id="4_bwbys"]
+[ext_resource type="Script" path="res://opponent2.gd" id="5_2mpwm"]
+[ext_resource type="AudioStream" uid="uid://ciw471xl7tbwr" path="res://menu.wav" id="7_ofwfu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bev6"]
+size = Vector2(2048, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7wdw"]
+size = Vector2(782.5, 401.5)
+
+[node name="Control" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bdpsr")
+
+[node name="Background" type="ColorRect" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -391.0
+offset_top = -29.0
+offset_right = 391.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_iikqu")
+theme_override_font_sizes/font_size = 96
+text = "Jugar
+"
+
+[node name="Controles" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_iikqu")
+theme_override_font_sizes/font_size = 96
+text = "Controles
+"
+
+[node name="Fullscreen" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_iikqu")
+theme_override_font_sizes/font_size = 96
+text = "Pantalla completa"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_iikqu")
+theme_override_font_sizes/font_size = 96
+text = "Salir
+"
+
+[node name="Label" type="Label" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -246.0
+offset_top = -310.5
+offset_right = 246.0
+offset_bottom = -127.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_iikqu")
+theme_override_font_sizes/font_size = 192
+text = "Pong!"
+
+[node name="Pared Superior" type="StaticBody2D" parent="."]
+process_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared Superior"]
+process_mode = 3
+position = Vector2(960, -15)
+shape = SubResource("RectangleShape2D_5bev6")
+
+[node name="Pared Inferior" type="StaticBody2D" parent="."]
+process_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared Inferior"]
+process_mode = 3
+position = Vector2(960, 1095)
+shape = SubResource("RectangleShape2D_5bev6")
+
+[node name="Pared izquierda" type="StaticBody2D" parent="."]
+process_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared izquierda"]
+process_mode = 3
+position = Vector2(-13, 560)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_5bev6")
+
+[node name="Pared derecha" type="StaticBody2D" parent="."]
+process_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared derecha"]
+process_mode = 3
+position = Vector2(1933, 536)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_5bev6")
+
+[node name="Botones" type="StaticBody2D" parent="."]
+process_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Botones"]
+process_mode = 3
+position = Vector2(960.75, 713.25)
+shape = SubResource("RectangleShape2D_u7wdw")
+
+[node name="Ball" parent="." instance=ExtResource("2_e0rnd")]
+position = Vector2(948, 447)
+
+[node name="Opponent" parent="." instance=ExtResource("3_u12nk")]
+position = Vector2(60, 460)
+script = ExtResource("4_bwbys")
+
+[node name="Opponent2" parent="." instance=ExtResource("3_u12nk")]
+position = Vector2(1839, 460)
+script = ExtResource("5_2mpwm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ofwfu")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Controles" to="." method="_on_controles_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

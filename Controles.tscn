@@ -1,0 +1,128 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbr56ie6ny218"]
+
+[ext_resource type="Script" path="res://Controles.gd" id="1_3d7cs"]
+[ext_resource type="FontFile" uid="uid://0xm5p4pi8rw0" path="res://alagard.ttf" id="1_6f0bt"]
+[ext_resource type="PackedScene" uid="uid://bl00t8q5v81hk" path="res://player.tscn" id="2_j0bcg"]
+[ext_resource type="PackedScene" uid="uid://bgprpwmg6eboy" path="res://fakeBall.tscn" id="3_q06wd"]
+[ext_resource type="AudioStream" uid="uid://ciw471xl7tbwr" path="res://menu.wav" id="5_1plqu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_02rue"]
+size = Vector2(2048, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2x7v"]
+size = Vector2(569, 97)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3d7cs")
+
+[node name="Background" type="ColorRect" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = -171.0
+offset_right = 651.0
+offset_bottom = -73.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="Atras" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_6f0bt")
+theme_override_font_sizes/font_size = 96
+text = "Atras
+"
+
+[node name="Player" parent="." instance=ExtResource("2_j0bcg")]
+position = Vector2(1632, 449)
+
+[node name="Pared Superior" type="StaticBody2D" parent="."]
+process_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared Superior"]
+process_mode = 3
+position = Vector2(960, -15)
+shape = SubResource("RectangleShape2D_02rue")
+
+[node name="Pared Inferior" type="StaticBody2D" parent="."]
+process_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared Inferior"]
+process_mode = 3
+position = Vector2(960, 1095)
+shape = SubResource("RectangleShape2D_02rue")
+
+[node name="Pared izquierda" type="StaticBody2D" parent="."]
+process_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared izquierda"]
+process_mode = 3
+position = Vector2(-13, 560)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_02rue")
+
+[node name="Pared derecha" type="StaticBody2D" parent="."]
+process_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared derecha"]
+process_mode = 3
+position = Vector2(1933, 536)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_02rue")
+
+[node name="Botones" type="StaticBody2D" parent="."]
+process_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Botones"]
+process_mode = 3
+position = Vector2(367.5, 957.5)
+shape = SubResource("RectangleShape2D_l2x7v")
+
+[node name="Ball" parent="." instance=ExtResource("3_q06wd")]
+position = Vector2(938, 519)
+
+[node name="Label" type="Label" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -867.0
+offset_top = -459.0
+offset_right = -3.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_6f0bt")
+theme_override_font_sizes/font_size = 96
+text = "Controles
+
+Esc - Pausa
+Flecha hacia arriba
+Flecha hacia abajo"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1plqu")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Atras" to="." method="_on_atras_pressed"]
